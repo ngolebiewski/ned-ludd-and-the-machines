@@ -1,10 +1,27 @@
 import { Application, Assets, Sprite, TilingSprite } from "pixi.js";
+import { AudioManager } from "../audioManager";
 
 (async () => {
   const app = new Application();
   await app.init({ background: "#222", resizeTo: window });
 
   document.getElementById("pixi-container").appendChild(app.canvas);
+
+  const audio = new AudioManager();
+
+  // IMPORTANT: unlock audio properly
+  app.stage.eventMode = "static";
+
+  app.stage.on("pointerdown", async () => {
+    if (audio.audioCtx.state === "suspended") {
+      await audio.audioCtx.resume();
+    }
+
+    audio.start();
+
+    // test SFX
+    audio.playSFX("explode");
+  });
 
   // -----------------------------
   // LOAD ASSETS
@@ -95,4 +112,10 @@ import { Application, Assets, Sprite, TilingSprite } from "pixi.js";
 
   layout();
   app.renderer.on("resize", layout);
+  // optional: test boss mode
+    window.addEventListener("keydown", (e) => {
+        console.log(e)
+        if (e.key === "b") audio.enterBossMode();
+        if (e.key === "n") audio.exitBossMode();
+    });
 })();
