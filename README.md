@@ -7,7 +7,7 @@ Unlikely to finish on time with a late start,
 
 ## Goals
 
-Experiment with hand-drawn spritesheets, and procedurally generated levels, with a poke at stocking weaving looms bringing down the wages and prospects of weavers being fastforwarded to the starting affects of AI on current day job prospects, also an unknown.
+Experiment with hand-drawn spritesheets, and procedurally generated levels, with a poke at AI via stocking weaving looms bringing down the wages and prospects of weavers being fastforwarded to the starting affects of AI on current day job prospects, also an unknown.
 
 ## Notes
 
@@ -24,3 +24,26 @@ then make soldiers more fierce.
 More of a capture than shoot
 
 then one awesome boss that will do some explaining on defeat, when you really are defeated, just delaying the inevitable
+
+## STRUCTURE
+
+Game (Singleton)
+ ├── SceneManager
+ │     ├── TitleScene
+ │     ├── CutsceneScene
+ │     └── LevelScene (ONLY gameplay)
+ │
+ ├── Entity system
+ │     ├── Entity (base)
+ │     ├── Player
+ │     ├── Enemy
+ │     └── Boss
+ │
+ ├── Input (abstract controller)
+ │     ├── Keyboard
+ │     ├── Gamepad (future)
+ │     └── Touch (future)
+ │
+ ├── AudioManager
+ │
+ └── World/Level generator (procedural)
